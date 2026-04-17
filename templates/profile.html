@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %} My Profile{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/profile.css' %}">
+{% endblock %}
+{% block message %}
+<div id="message-container">
+    {% for message in messages %}
+    <div class="flash-message {% if message.tags == 'success' %} success {% elif message.tags == 'error' %} error {% else %} default {% endif %}">
+        <span>{{ message }}</span>
+        <button class="close-btn">
+            <svg width="16" height="16" viewBox="0 0 24 24" stroke="white" fill="none" stroke-width="2">
+                <line x1="18" y1="6" x2="6" y2="18"/>
+                <line x1="6" y1="6" x2="18" y2="18"/>
+            </svg>
+        </button>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
+{% block content %}
+<main class="profile-main">
+    <div class="profile-container">
+        
+        <aside class="profile-sidebar">
+            <div class="profile-avatar">
+                {% if image_url %}
+                <img src="{{ image_url }}" width="190" height="190" loading="eager" decoding="async" fetchpriority="high" alt="Profile" style="border-radius: 80%; object-fit: cover;">
+                {% else %}
+                <svg viewBox="0 0 24 24">
+                    <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                </svg>
+                {% endif %}
+            </div>
+            {% if enrollment %}
+            <div class="member-name">{{ enrollment.fullname }}</div>
+            <div class="member-id">{{ enrollment.unique_id }}</div>
+            {% endif %}
+            <div class="welcome-msg">Welcome to your profile</div>
+        </aside>
+
+        <div class="profile-details-card">
+            <div class="profile-grid">
+                
+                <div class="profile-item">
+                    <span class="profile-label">Full Name</span>
+                    <span class="profile-value">{{ enrollment.fullname|default:"Not Provided" }}</span>
+                </div>
+
+                <div class="profile-item">
+                    <span class="profile-label">Phone Number</span>
+                    <span class="profile-value">{{user.username|default:"Not Provided"}}</span>
+                </div>
+
+                <div class="profile-item">
+                    <span class="profile-label">Email Address</span>
+                    <span class="profile-value" style="color: #ef4444;"; font-weight: 500;>
+                        {{ enrollment.email|default:"Not Provided" }}
+                    </span>
+                </div>
+
+                <div class="profile-item">
+                    <span class="profile-label">Date of Birth</span>
+                    <span class="profile-value">{{ enrollment.dob|date:"F j, Y"|default:"Not Provided" }}</span>
+                </div>
+
+                <div class="profile-item">
+                    <span class="profile-label">Membership Plan</span>
+                    <span class="profile-value status-green">{{ enrollment.selectPlan.plan|default:"Not Enrolled" }}</span>
+                </div>
+
+                <div class="profile-item">
+                    <span class="profile-label">Membership Status</span>
+                    {% if enrollment %}
+                        <span class="profile-value status-green">Active</span>
+                    {% else %}
+                        <span class="profile-value" style="color: #ef4444;">Inactive</span>
+                    {% endif %}
+                </div>
+
+                <div class="profile-item full-width">
+                    <span class="profile-label">Personal Trainer</span>
+                    <span class="profile-value">{{ enrollment.trainer.name|default:"No Trainer Selected" }}</span>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</main>
+{% endblock %}

@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %} Contact Us{% endblock %}
+{% block description %}Reach out to book your first session or ask a question.{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/contact.css' %}">
+{% endblock %}
+
+{% block message %}
+<div id="message-container">
+    {% for message in messages %}
+    <div class="flash-message {% if message.tags == 'success' %} success {% elif message.tags == 'error' %} error {% else %} default {% endif %}">
+        <span>{{ message }}</span>
+        <button class="close-btn">
+            <svg width="16" height="16" viewBox="0 0 24 24" stroke="white" fill="none" stroke-width="2">
+                <line x1="18" y1="6" x2="6" y2="18"/>
+                <line x1="6" y1="6" x2="18" y2="18"/>
+            </svg>
+        </button>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
+{% block content %}
+<main>
+    <section class="contact-section">
+        <div class="contact-header">
+            <h1 class="contact-title">Start your journey</h1>
+            <p class="contact-subtitle">Reach out to book your first session, ask a question, or<br>learn more about the studio.</p>
+        </div>
+        
+        <div class="contact-container">
+            <div class="contact-form-card">
+                <div class="contact-brand">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M13 2.5L3 14H11.5L10 21.5L20 10H11.5L13 2.5Z" fill="#F16F24" />
+                    </svg>
+                    <span>IDLE</span>
+                </div>
+
+                <form class="contact-form" method="POST" action="">
+                    {% csrf_token %}
+                    
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" id="name" name="name" placeholder="Enter your full name" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" name="email" placeholder="Enter your email" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" name="message" rows="6" placeholder="How can we help you?" required></textarea>
+                    </div>
+                    
+                    <button type="submit" class="btn-submit">SUBMIT</button>
+                </form>
+            </div>
+            
+            <div class="contact-image-wrapper">
+                <img src="https://images.unsplash.com/photo-1518611012118-696072aa579a?auto=format&fit=crop&q=80&w=1200" alt="Woman focusing on fitness journey">
+            </div>
+        </div>
+    </section>
+</main>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    document.querySelectorAll('.close-btn').forEach(button => {
+        button.addEventListener('click', function() {
+            this.parentElement.style.display = 'none';
+        });
+    });
+</script>
+{% endblock %}

@@ -1,0 +1,81 @@
+{% extends "base.html" %} {% load static %} {% block title %} Sign Up 
+{% endblock %} {% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/auth.css' %}" />
+{% endblock %} {% block message %}
+<div id="message-container">
+  {% for message in messages %}
+  <div
+    class="flash-message {% if message.tags == 'success' %} success {% elif message.tags == 'error' %} error {% else %} default {% endif %}"
+  >
+    <span>{{ message }}</span>
+
+    <button class="close-btn">×</button>
+  </div>
+  {% endfor %}
+</div>
+{% endblock %} {% block content %}
+<main class="auth-main">
+  <div class="auth-container">
+    <h1 class="auth-title">Join IDLE</h1>
+    <p class="auth-subtitle">Create an account to start your journey.</p>
+
+    <form class="auth-form" method="POST">
+      {% csrf_token %}
+
+      <div class="form-group">
+        <label for="phone">Phone Number</label>
+        <input
+          type="tel"
+          name="username"
+          class="text"
+          value="{{ form.username.value|default:'' }}"
+          required
+          pattern="[0-9]{10}"
+          maxlength="10"
+          minlength="10"
+        />
+        {% if form.username.errors %}
+        <small class="error">{{ form.username.errors.0 }}</small>
+      {% endif %}
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input
+          type="password"
+          name="password1"
+          placeholder="Create a password"
+          pattern="[A-Za-z0-9]{8,}"
+          required
+        />
+        <p class="form-helper">
+          Password must be at least 8 characters and contain only letters and
+          numbers.
+        </p>
+        {% if form.password1.errors %}
+        <small class="error">{{ form.password1.errors.0 }}</small>
+      {% endif %}
+      </div>
+
+      <div class="form-group">
+        <label for="confirm-password">Confirm Password</label>
+        <input type="password" name="password2" required />
+      </div>
+      {% if form.password2.errors %}
+        <small class="error">{{ form.password2.errors.0 }}</small>
+      {% endif %}
+
+      <button type="submit" class="btn-auth-primary">CREATE ACCOUNT</button>
+    </form>
+
+    <div class="auth-switch">
+      <p>Already have an account?</p>
+      <a href="/login" class="btn-glow"> LOGIN TO YOUR ACCOUNT </a>
+    </div>
+  </div>
+</main>
+{% endblock %} {% block extra_js %}
+<script src="{% static 'js/signup.js' %}"></script>
+<script src="{% static 'js/message.js' %}"></script>
+
+{% endblock %}

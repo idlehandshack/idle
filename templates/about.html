@@ -1,0 +1,119 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %} About Us{% endblock %}
+{% block description %}Learn more about Idle's story, mission, and the expert team helping you reach your fitness goals.{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/about.css' %}">
+{% endblock %}
+
+{% block content %}
+<main>
+    <section class="about-hero">
+        <div class="about-hero-content">
+            <div class="section-chip">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M13 2.5L3 14H11.5L10 21.5L20 10H11.5L13 2.5Z" fill="#2E2825" />
+                </svg>
+                OUR STORY
+            </div>
+            <h1 class="about-title">BEYOND <br><span class="text-fade">THE TRADITIONAL</span></h1>
+            <p class="about-desc">Idle was founded on the belief that fitness should be a thoughtful, personalized experience, not a mass-produced routine. We've created a sanctuary for those who demand more from their training.</p>
+        </div>
+        <div class="about-hero-image">
+            <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&q=80&w=2670" alt="Premium Gym Equipment">
+        </div>
+    </section>
+
+    <section class="values-section">
+        <div class="values-container">
+            <div class="values-content">
+                <h2>Driven by <br>excellence</h2>
+                
+                <div class="value-item">
+                    <h3>Intentional Training</h3>
+                    <p>We reject cookie-cutter programs. Every movement, class, and routine is purposefully designed to yield measurable, lasting results for your specific body type.</p>
+                </div>
+                
+                <div class="value-item">
+                    <h3>Elevated Environment</h3>
+                    <p>Atmosphere dictates performance. Our facilities are meticulously crafted to provide a calm, focused space devoid of distractions and overwhelming crowds.</p>
+                </div>
+                
+                <div class="value-item">
+                    <h3>Holistic Approach</h3>
+                    <p>Strength is multidimensional. We blend rigorous physical training with recovery protocols and nutritional guidance to build resilience inside and out.</p>
+                </div>
+            </div>
+            <div class="values-image">
+                <img src="https://images.unsplash.com/photo-1574680096145-d05b474e2155?auto=format&fit=crop&q=80&w=1200" alt="Athlete training">
+            </div>
+        </div>
+    </section>
+
+    <section class="team-section">
+        <div class="section-header">
+            <div class="section-chip">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M13 2.5L3 14H11.5L10 21.5L20 10H11.5L13 2.5Z" fill="#2E2825" />
+                </svg>
+                THE EXPERTS
+            </div>
+            <h2 class="section-title">Meet our coaches</h2>
+            <p class="section-desc">A team of dedicated professionals committed to guiding you towards your strongest self.</p>
+        </div>
+        <div class="team-grid">
+            <div class="team-card">
+                <div class="member-image">
+                    <img src="https://images.unsplash.com/photo-1594381898411-846e7d193883?auto=format&fit=crop&q=80&w=800" alt="Coach Sarah Jenkins">
+                </div>
+                <div class="member-info">
+                    <h3>Sarah Jenkins</h3>
+                    <p>Head of Strength</p>
+                </div>
+            </div>
+            <div class="team-card">
+                <div class="member-image">
+                    <img src="https://images.unsplash.com/photo-1567598508481-65985588e295?auto=format&fit=crop&q=80&w=800" alt="Coach Marcus Wright">
+                </div>
+                <div class="member-info">
+                    <h3>Marcus Wright</h3>
+                    <p>Performance Specialist</p>
+                </div>
+            </div>
+            <div class="team-card">
+                <div class="member-image">
+                    <img src="https://images.unsplash.com/photo-1609132718484-cc90df3417f8?auto=format&fit=crop&q=80&w=800" alt="Coach Elena Rust">
+                </div>
+                <div class="member-info">
+                    <h3>Elena Rust</h3>
+                    <p>Conditioning Lead</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section">
+        <div class="cta-floating-images">
+            <div class="float-img img-tl"><img src="https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?auto=format&fit=crop&q=80&w=200" alt=""></div>
+            <div class="float-img img-ml"><img src="https://images.unsplash.com/photo-1518611012118-696072aa579a?auto=format&fit=crop&q=80&w=400" alt=""></div>
+            <div class="float-img img-bl"><img src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&q=80&w=200" alt=""></div>
+            <div class="float-img img-tr"><img src="https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?auto=format&fit=crop&q=80&w=200" alt=""></div>
+            <div class="float-img img-mr"><img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&q=80&w=400" alt=""></div>
+            <div class="float-img img-br"><img src="https://images.unsplash.com/photo-1548690312-e3b507d8c110?auto=format&fit=crop&q=80&w=200" alt=""></div>
+        </div>
+
+        <div class="cta-content">
+            <div class="section-chip">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M13 2.5L3 14H11.5L10 21.5L20 10H11.5L13 2.5Z" fill="#2E2825" />
+                </svg> READY TO START?
+            </div>
+            <h2 class="cta-title">Join the Idle community</h2>
+            <p class="cta-desc">Experience thoughtful training, expert coaching, and a<br>community that lifts you up.</p>
+            <a href="{% url 'membership' %}" class="btn btn-peach mt-4">VIEW MEMBERSHIPS</a>
+        </div>
+    </section>
+</main>
+{% endblock %}

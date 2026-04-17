@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %} Free Trial{% endblock %}
+{% block description %}Start your 2 day free trial. Get fit, strong & motivated with Idle.{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/trial.css' %}">
+{% endblock %}
+
+{% block content %}
+<main>
+    <section class="trial-section">
+        <div class="trial-content">
+            <div class="section-chip">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M13 2.5L3 14H11.5L10 21.5L20 10H11.5L13 2.5Z" fill="#F16F24" />
+                </svg>
+                ARE YOU READY TO
+            </div>
+            <h1 class="trial-title"><span class="accent-text">GET FIT,</span> STRONG<br>& MOTIVATED!</h1>
+            <div class="trial-subtext">
+                <h3>REGISTRATION NOW TO GET</h3>
+                <p>WHERE HEALTH, BEAUTY AND FITNESS MEET.</p>
+            </div>
+            <a href="{% url 'membership' %}" class="btn btn-peach btn-large">Start 2 Day Free Trial</a>
+        </div>
+        
+        <div class="trial-image-container">
+            <img src="https://images.unsplash.com/photo-1541534741688-6078c6bfb5c5?auto=format&fit=crop&q=80&w=2670" alt="Person doing battle ropes exercise">
+        </div>
+    </section>
+
+    <section class="plans-section">
+        <div class="plans-container">
+            <div class="plans-header">
+                <div class="section-chip">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M13 2.5L3 14H11.5L10 21.5L20 10H11.5L13 2.5Z" fill="#2E2825" />
+                    </svg>
+                    OUR PLANS
+                </div>
+                <h2 class="section-title">CHOOSE YOUR FITNESS PLAN</h2>
+            </div>
+
+            <div class="plans-grid">
+                <div class="plan-card">
+                    <h3 class="plan-title">Essential</h3>
+                    <div class="plan-price">₹2000<span>/m</span></div>
+                    <p class="plan-desc">Perfect for those getting started or looking to maintain their baseline fitness.</p>
+                    <ul class="plan-features">
+                        <li>Access to main floor and equipment</li>
+                        <li>2 group classes per week</li>
+                        <li>Locker room & amenities</li>
+                        <li>Monthly progress check-in</li>
+                    </ul>
+                    <a href="{% url 'membership' %}" class="btn btn-dark">SELECT PLAN</a>
+                </div>
+
+                <div class="plan-card elite-card">
+                    <h3 class="plan-title">Elite</h3>
+                    <div class="plan-price">₹4500<span>/m</span></div>
+                    <p class="plan-desc">For those committed to measurable growth and unrestricted training flexibility.</p>
+                    <ul class="plan-features">
+                        <li>Unlimited 24/7 club access</li>
+                        <li>Unlimited group classes</li>
+                        <li>1 Personal Training session per month</li>
+                        <li>Advanced body composition scans</li>
+                        <li>Access to recovery suite (Sauna & Cold Plunge)</li>
+                    </ul>
+                    <a href="{% url 'membership' %}" class="btn btn-peach">SELECT PLAN</a>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+{% endblock %}

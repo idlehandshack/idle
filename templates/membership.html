@@ -1,0 +1,160 @@
+{% extends "base.html" %} {% load static %} {% block title %} Membership
+Registration{% endblock %} {% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/registration.css' %}" />
+{% endblock %} {% block content %}
+<main class="reg-main">
+  <div class="reg-header">
+    <h1>GYM REGISTRATION FORM</h1>
+    <p>
+      Please complete this form to register for a gym membership and gain access
+      to all our fitness services.
+    </p>
+  </div>
+
+  <div class="reg-card">
+    <form
+      id="enrollForm"
+      class="reg-form"
+      method="POST"
+      action="{% url 'membership' %}"
+    >
+      {% csrf_token %}
+      <h2 class="reg-section-title">Personal Information</h2>
+      <div class="reg-grid">
+        <div class="reg-full">
+          <input
+            type="text"
+            name="name"
+            class="reg-input"
+            placeholder="Full Name"
+            required
+          />
+        </div>
+        <div>
+          <input
+            type="email"
+            name="email"
+            class="reg-input"
+            placeholder="Email Address"
+            required
+          />
+        </div>
+        <div>
+          <input
+            type="tel"
+            name="phone"
+            class="reg-input"
+            placeholder="Phone Number"
+            value="{{user.username}}"
+            readonly
+          />
+        </div>
+
+        <div class="dropdown-wrap relative">
+          <input type="hidden" name="gender" id="genderInput" required />
+          <button
+            type="button"
+            class="reg-input custom-select-btn"
+            id="genderBtn"
+          >
+            <span id="selectedGender" class="placeholder">Select Gender</span>
+          </button>
+          <div class="dropdown-menu" id="genderDropdown">
+            <div class="dropdown-item" data-value="M">Male</div>
+            <div class="dropdown-item" data-value="F">Female</div>
+            <div class="dropdown-item" data-value="O">Other</div>
+          </div>
+        </div>
+
+        <div>
+          <input
+            type="date"
+            name="dob"
+            id="dobInput"
+            class="reg-input"
+            placeholder="dd-mm-yyyy"
+            required
+          />
+        </div>
+      </div>
+
+      <h2 class="reg-section-title">Membership Details</h2>
+      <div class="reg-grid">
+        <div class="dropdown-wrap relative reg-full">
+          <input type="hidden" name="plan" id="planInput" required />
+          <button
+            type="button"
+            class="reg-input custom-select-btn"
+            id="planBtn"
+          >
+            <span id="selectedPlan" class="placeholder"
+              >Select Membership Plan</span
+            >
+          </button>
+          <div class="dropdown-menu" id="planDropdown">
+            {% for p in plans %}
+            <div
+              class="dropdown-item"
+              onclick="selectPlan('{{ p.id }}', '{{ p.plan }}', '{{ p.price }}')"
+            >
+              {{ p.plan }} - ₹{{ p.price }}
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+
+        <div class="dropdown-wrap relative reg-full">
+          <input type="hidden" name="trainer" id="trainerInput" required />
+          <button
+            type="button"
+            class="reg-input custom-select-btn"
+            id="trainerBtn"
+          >
+            <span id="selectedTrainer" class="placeholder"
+              >Select Personal Trainer</span
+            >
+          </button>
+          <div class="dropdown-menu" id="trainerDropdown">
+            {% for t in trainers %}
+            <div
+              class="dropdown-item"
+              onclick="selectTrainer('{{ t.id }}', '{{ t.name }}')"
+            >
+              {{ t.name }}
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+
+        <div class="reg-full">
+          <input
+            type="text"
+            name="referred_by"
+            class="reg-input"
+            placeholder="Referred By (Optional)"
+          />
+        </div>
+        <div class="reg-full">
+          <textarea
+            name="address"
+            class="reg-input"
+            placeholder="Address"
+            required
+          ></textarea>
+        </div>
+      </div>
+
+      <label class="reg-checkbox">
+        <input type="checkbox" name="terms" required />
+        <span>I agree to gym terms and conditions.</span>
+      </label>
+
+      <button type="submit" id="enrollBtn" class="btn-enroll">
+        Enroll Now
+      </button>
+    </form>
+  </div>
+</main>
+{% endblock %} {% block extra_js %}
+<script src="{% static 'js/membership.js' %}"></script>
+{% endblock %}

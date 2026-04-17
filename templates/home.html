@@ -1,0 +1,657 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Virtus | Power In Form</title>
+    <meta
+      name="description"
+      content="Discover empowering classes that build confidence and tone your body at Virtus."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+  </head>
+  <body>
+    <div id="message-container">
+      {% for message in messages %}
+      <div
+        class="flash-message {% if message.tags == 'success' %} success {% elif message.tags == 'error' %} error {% else %} default {% endif %}"
+      >
+        <span>{{ message }}</span>
+        <button class="close-btn">×</button>
+      </div>
+      {% endfor %}
+    </div>
+    <!-- MOBILE MENU -->
+    <div class="mobile-menu" id="mobileMenu">
+      <span class="mobile-menu-close" id="mobileMenuClose">✕</span>
+      <a href="/">Home</a>
+      <a href="/contact/">Contact</a>
+      <a href="/about/">About</a>
+      <a href="/trial/">Trial</a>
+      {% if not enrolled %}
+      <a href="{% url 'membership' %}">Membership</a>
+      {% else %}
+      <a href="{% url 'attendence' %}">Attendance</a>
+      {% endif %}
+      {% if request.user.is_authenticated %} 
+      <a href="{% url 'profile' %}" class="btn btn-subscribe" style="margin-top: 16px"
+        >My Profile</a
+      >
+      <form action="{% url 'logout' %}" method="POST" style="display: inline">
+          {% csrf_token %}
+          <button type="submit" class="btn btn-subscribe" id="btn-logout">
+            Log Out
+          </button>
+        </form>
+      {% else %}
+      <a href="{% url 'signPage' %}" class="btn btn-subscribe" style="margin-top: 16px"
+      >Login / Sign Up</a
+      >
+      {% endif %}
+    </div>
+
+    <!-- TOAST -->
+    <div class="toast" id="toast"></div>
+
+    <!-- NAVBAR -->
+    <nav class="navbar">
+      <div class="logo">
+        <svg
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M13 2.5L3 14H11.5L10 21.5L20 10H11.5L13 2.5Z"
+            fill="#F16F24"
+          />
+        </svg>
+      </div>
+
+      <ul class="nav-links">
+        <li><a href="/contact/">CONTACT</a></li>
+        <li><a href="/trial/">TRIAL</a></li>
+        <li class="brand"><a href="/">IDLE</a></li>
+        {% if not enrolled %}
+        <li><a href="{% url 'membership' %}">MEMBERSHIP</a></li>
+        {% else %}
+        <li><a href="/attendence/">ATTENDANCE</a></li>
+        {% endif %}
+        <li><a href="about.html">ABOUT</a></li>
+      </ul>
+
+      <div class="nav-actions auth-actions">
+        {% if request.user.is_authenticated %}
+        <a href="/profile/" class="btn btn-dark-outline" id="btn-profile"
+          >My Profile</a
+        >
+        <form action="{% url 'logout' %}" method="POST" style="display: inline">
+          {% csrf_token %}
+          <button type="submit" class="btn btn-subscribe" id="btn-logout">
+            Log Out
+          </button>
+        </form>
+        {% else %}
+        <a href="/login/" class="btn btn-subscribe" id="btn-login-signup"
+          >Login/Sign Up</a
+        >
+        {% endif %}
+      </div>
+
+      <div class="hamburger" id="hamburger">
+        <span></span><span></span><span></span>
+      </div>
+    </nav>
+
+    <main>
+      <!-- HERO -->
+      <section class="hero-section">
+        <h1 class="hero-title">POWER IN FORM</h1>
+        <div class="hero-image-wrapper">
+          <img
+            src="https://images.unsplash.com/photo-1540497077202-7c8a3999166f?auto=format&fit=crop&q=80&w=2670"
+            alt="Joyful fit woman running on a treadmill"
+          />
+          <div class="slider-dots">
+            <span class="dot active" data-index="0"></span>
+            <span class="dot" data-index="1"></span>
+          </div>
+          <div class="hero-chip">DEFINED BY RESULTS</div>
+        </div>
+
+        <div class="stats-container">
+          <div class="stat-item">
+            <h2 class="count-up" data-target="320">0</h2>
+            <p>ACTIVE MEMBERS</p>
+          </div>
+          <div class="stat-divider"></div>
+          <div class="stat-item">
+            <h2 class="count-up" data-target="5">0</h2>
+            <p>PRIVATE GYMS</p>
+          </div>
+          <div class="stat-divider"></div>
+          <div class="stat-item">
+            <h2 class="count-up" data-target="1150">0</h2>
+            <p>SESSIONS DELIVERED</p>
+          </div>
+          <div class="stat-divider"></div>
+          <div class="stat-item">
+            <h2>4.85<span class="accent-star">*</span></h2>
+            <p>AVG. CLIENT REVIEW SCORE</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- CLASSES -->
+      <section class="classes-overview-section">
+        <div class="section-header">
+          <div class="section-chip">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none">
+              <path
+                d="M13 2.5L3 14H11.5L10 21.5L20 10H11.5L13 2.5Z"
+                fill="#2E2825"
+              />
+            </svg>
+            CLASSES
+          </div>
+          <h2 class="section-title">Strength styled for you</h2>
+          <p class="section-desc">
+            Empowering classes that build confidence, tone your<br />body, and
+            support your goals in a refined, supportive<br />environment.
+          </p>
+          <a
+            href="#"
+            class="btn btn-peach"
+            data-toast="Coming soon — all classes page!"
+            >VIEW ALL CLASSES</a
+          >
+        </div>
+
+        <div class="classes-grid">
+          <!-- Card 1 -->
+          <div class="class-card">
+            <div class="image-container">
+              <img
+                src="https://images.unsplash.com/photo-1518611012118-696072aa579a?auto=format&fit=crop&q=80&w=1200"
+                alt="Sculpt & Tone"
+              />
+            </div>
+            <div class="card-meta">
+              <span class="meta-badge essential">
+                <svg width="10" height="10" viewBox="0 0 24 24" fill="none">
+                  <path
+                    d="M13 2.5L3 14H11.5L10 21.5L20 10H11.5L13 2.5Z"
+                    fill="#2E2825"
+                  />
+                </svg>
+                ESSENTIAL
+              </span>
+              <span class="meta-badge duration">
+                <svg width="10" height="10" viewBox="0 0 24 24" fill="none">
+                  <circle
+                    cx="12"
+                    cy="12"
+                    r="10"
+                    stroke="#2E2825"
+                    stroke-width="2"
+                  />
+                  <path
+                    d="M12 6V12L16 16"
+                    stroke="#2E2825"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                  />
+                </svg>
+                45 MINUTES
+              </span>
+            </div>
+            <h3 class="card-title">Sculpt &amp; Tone</h3>
+            <p class="card-desc">
+              A low-impact sculpting class focused on controlled movements that
+              tone, lengthen, and define the body while improving posture and
+              core stability.
+            </p>
+            <a
+              href="#"
+              class="btn btn-peach btn-sm"
+              data-toast="Sculpt & Tone class details coming soon!"
+              >SEE CLASS</a
+            >
+          </div>
+
+          <!-- Card 2 -->
+          <div class="class-card">
+            <div class="image-container">
+              <img
+                src="https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?auto=format&fit=crop&q=80&w=1200"
+                alt="Precision Strength"
+              />
+            </div>
+            <div class="card-meta">
+              <span class="meta-badge progression">
+                <svg width="10" height="10" viewBox="0 0 24 24" fill="none">
+                  <path
+                    d="M13 2.5L3 14H11.5L10 21.5L20 10H11.5L13 2.5Z"
+                    fill="#2E2825"
+                  />
+                </svg>
+                PROGRESSION
+              </span>
+              <span class="meta-badge duration">
+                <svg width="10" height="10" viewBox="0 0 24 24" fill="none">
+                  <circle
+                    cx="12"
+                    cy="12"
+                    r="10"
+                    stroke="#2E2825"
+                    stroke-width="2"
+                  />
+                  <path
+                    d="M12 6V12L16 16"
+                    stroke="#2E2825"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                  />
+                </svg>
+                1 HOUR 15 MINUTES
+              </span>
+            </div>
+            <h3 class="card-title">Precision Strength</h3>
+            <p class="card-desc">
+              A structured strength session combining functional lifts and
+              controlled tempo training to build lean muscle and elevate
+              total-body performance.
+            </p>
+            <a
+              href="#"
+              class="btn btn-peach btn-sm"
+              data-toast="Precision Strength class details coming soon!"
+              >SEE CLASS</a
+            >
+          </div>
+
+          <!-- Card 3 -->
+          <div class="class-card">
+            <div class="image-container">
+              <img
+                src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&q=80&w=1200"
+                alt="Power Conditioning"
+              />
+            </div>
+            <div class="card-meta">
+              <span class="meta-badge elite">
+                <svg width="10" height="10" viewBox="0 0 24 24" fill="none">
+                  <path
+                    d="M13 2.5L3 14H11.5L10 21.5L20 10H11.5L13 2.5Z"
+                    fill="#FFFFFF"
+                  />
+                </svg>
+                ELITE
+              </span>
+              <span class="meta-badge duration">
+                <svg width="10" height="10" viewBox="0 0 24 24" fill="none">
+                  <circle
+                    cx="12"
+                    cy="12"
+                    r="10"
+                    stroke="#2E2825"
+                    stroke-width="2"
+                  />
+                  <path
+                    d="M12 6V12L16 16"
+                    stroke="#2E2825"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                  />
+                </svg>
+                45 MINUTES
+              </span>
+            </div>
+            <h3 class="card-title">Power Conditioning</h3>
+            <p class="card-desc">
+              An advanced conditioning class blending strength circuits and
+              athletic intervals to build explosive power, endurance, and
+              total-body resilience.
+            </p>
+            <a
+              href="#"
+              class="btn btn-peach btn-sm"
+              data-toast="Power Conditioning class details coming soon!"
+              >SEE CLASS</a
+            >
+          </div>
+        </div>
+      </section>
+
+      <!-- STEPS -->
+      <section class="steps-section">
+        <div class="steps-content">
+          <div class="steps-header">
+            <div class="meta-badge dark-badge">
+              <svg width="10" height="10" viewBox="0 0 24 24" fill="none">
+                <path
+                  d="M13 2.5L3 14H11.5L10 21.5L20 10H11.5L13 2.5Z"
+                  fill="#F16F24"
+                />
+              </svg>
+              GET STARTED
+            </div>
+            <h2 class="steps-title">
+              Step in to <br /><span class="text-fade">your glow</span>
+            </h2>
+            <p class="steps-desc">
+              Enter a sanctuary crafted to rejuvenate your body, soothe your
+              mind, and boost your self-assurance.
+            </p>
+            <a href="membership.html" class="btn btn-peach mt-4"
+              >GET A MEMBERSHIP</a
+            >
+          </div>
+
+          <div class="steps-grid">
+            <div class="step-card">
+              <div class="step-image">
+                <img
+                  src="https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?auto=format&fit=crop&q=80&w=600"
+                  alt="Sign up online"
+                />
+              </div>
+              <div class="step-badge">STEP 1</div>
+              <h3>Sign up online</h3>
+              <p>
+                Creating your account takes less than 2 minutes. Just enter your
+                details, choose your membership, and you're officially part of
+                the team.
+              </p>
+            </div>
+
+            <div class="step-card step-card-2">
+              <div class="step-image">
+                <img
+                  src="https://images.unsplash.com/photo-1548690312-e3b507d8c110?auto=format&fit=crop&q=80&w=600"
+                  alt="Get a membership"
+                />
+              </div>
+              <div class="step-badge">STEP 2</div>
+              <h3>Get a membership</h3>
+              <p>
+                Every member gets a personalized training plan built around
+                their goals, fitness level, and schedule. No cookie-cutter
+                workouts, just a plan that's made for you.
+              </p>
+            </div>
+
+            <div class="step-card step-card-3">
+              <div class="step-image">
+                <img
+                  src="https://images.unsplash.com/photo-1518611012118-696072aa579a?auto=format&fit=crop&q=80&w=600"
+                  alt="Start training"
+                />
+              </div>
+              <div class="step-badge">STEP 3</div>
+              <h3>Start training</h3>
+              <p>
+                Walk through our doors, hit the floor, and start making progress
+                from day one. Your goals are closer than you think, all it takes
+                is that first step.
+              </p>
+            </div>
+
+            <div class="bg-bolt">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M13 2.5L3 14H11.5L10 21.5L20 10H11.5L13 2.5Z"
+                  fill="#F8F8F8"
+                />
+              </svg>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- WHY US -->
+      <section class="why-us-section">
+        <div class="why-us-header">
+          <div class="section-chip">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none">
+              <path
+                d="M13 2.5L3 14H11.5L10 21.5L20 10H11.5L13 2.5Z"
+                fill="#2E2825"
+              />
+            </svg>
+            WHY US
+          </div>
+          <h2 class="why-us-title">Where standards are higher</h2>
+          <p class="why-us-desc">
+            We prioritize precision, personalization, and<br />performance over
+            trends and volume.
+          </p>
+        </div>
+
+        <div class="why-us-grid">
+          <div class="why-col">
+            <div class="why-card">
+              <div class="why-icon">
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="#2A2523"
+                  stroke-width="2"
+                >
+                  <circle cx="12" cy="12" r="10" />
+                  <path
+                    d="M8 12h8M10 8l-2 4 2 4M14 8l2 4-2 4"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+              </div>
+              <h3>Personalized training</h3>
+              <p>
+                Every client follows a plan tailored to their body, goals, and
+                lifestyle - no generic workouts, ever.
+              </p>
+            </div>
+            <div class="why-card">
+              <div class="why-icon">
+                <svg
+                  width="22"
+                  height="22"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="#2A2523"
+                  stroke-width="2"
+                >
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                  <path d="m9 12 2 2 4-4" />
+                </svg>
+              </div>
+              <h3>Expert-led coaching</h3>
+              <p>
+                Certified trainers who focus on precision, technique, and
+                long-term results, not trends.
+              </p>
+            </div>
+          </div>
+
+          <div class="why-col why-center">
+            <img
+              src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&q=80&w=800"
+              alt="Training correctly"
+              class="why-feature-img"
+            />
+          </div>
+
+          <div class="why-col">
+            <div class="why-card">
+              <div class="why-icon">
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="#2A2523"
+                  stroke-width="2"
+                >
+                  <circle cx="12" cy="7" r="4" />
+                  <path d="M5.5 21v-2a4 4 0 0 1 4-4h5a4 4 0 0 1 4 4v2" />
+                </svg>
+              </div>
+              <h3>Private environment</h3>
+              <p>
+                A calm, thoughtfully designed space where you can train without
+                crowds or distractions.
+              </p>
+            </div>
+            <div class="why-card">
+              <div class="why-icon">
+                <svg
+                  width="22"
+                  height="22"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="#2A2523"
+                  stroke-width="2"
+                >
+                  <path d="m3 21 6-6 4 4 8-8" />
+                  <path d="M14 11h7v7" />
+                </svg>
+              </div>
+              <h3>Measurable results</h3>
+              <p>
+                We track progress through performance, strength, and movement
+                improvements.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- CTA -->
+      <section class="cta-section">
+        <div class="cta-floating-images">
+          <div class="float-img img-tl">
+            <img
+              src="https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?auto=format&fit=crop&q=80&w=200"
+              alt=""
+            />
+          </div>
+          <div class="float-img img-ml">
+            <div class="img-fade-container">
+              <img
+                src="https://images.unsplash.com/photo-1518611012118-696072aa579a?auto=format&fit=crop&q=80&w=400"
+                alt=""
+              />
+            </div>
+          </div>
+          <div class="float-img img-bl">
+            <img
+              src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&q=80&w=200"
+              alt=""
+            />
+          </div>
+          <div class="float-img img-tr">
+            <img
+              src="https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?auto=format&fit=crop&q=80&w=200"
+              alt=""
+            />
+          </div>
+          <div class="float-img img-mr">
+            <div class="img-fade-container">
+              <img
+                src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&q=80&w=400"
+                alt=""
+              />
+            </div>
+          </div>
+          <div class="float-img img-br">
+            <img
+              src="https://images.unsplash.com/photo-1548690312-e3b507d8c110?auto=format&fit=crop&q=80&w=200"
+              alt=""
+            />
+          </div>
+        </div>
+
+        <div class="cta-content">
+          <div class="section-chip">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none">
+              <path
+                d="M13 2.5L3 14H11.5L10 21.5L20 10H11.5L13 2.5Z"
+                fill="#2E2825"
+              />
+            </svg>
+            GET STARTED
+          </div>
+          <h2 class="cta-title">Step into your strongest self</h2>
+          <p class="cta-desc">
+            Experience thoughtful training, expert coaching, and a<br />community
+            that lifts you up.
+          </p>
+          <a href="trial.html" class="btn btn-peach mt-4">TRY NOW</a>
+
+          <div class="cta-social-proof">
+            <div class="avatars">
+              <img
+                src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=100"
+                alt="Avatar"
+              />
+              <img
+                src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&q=80&w=100"
+                alt="Avatar"
+              />
+              <img
+                src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=100"
+                alt="Avatar"
+              />
+              <img
+                src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=100"
+                alt="Avatar"
+              />
+            </div>
+            <strong>350+</strong>&nbsp;gym goers are waiting for you to join
+            them!
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-top">
+        <div class="footer-links-container">
+          <div class="footer-col">
+            <a href="membership.html">MEMBERSHIP</a>
+            <a href="contact.html">CONTACT</a>
+          </div>
+          <div class="footer-col">
+            <a href="trial.html">TRIAL</a>
+            <a href="about.html">ABOUT</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div class="footer-brand">
+          <h1 class="huge-brand"><span class="asterisk">*</span>IDLE</h1>
+          <p class="copyright">
+            © Made by <u>Idle Design</u> | Powered by <u>Webflow</u>
+          </p>
+        </div>
+      </div>
+    </footer>
+    <script src="{% static 'js/home.js' %}"></script>
+  </body>
+</html>
