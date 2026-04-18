@@ -78,7 +78,10 @@
       </div>
 
       <ul class="nav-links">
-        <li><a href="/contact/">CONTACT</a></li>
+        {% if isSuperuser %}
+        <li><a href="/admin/revenue/">Revenue</a></li>
+        {% endif %}
+        <li><a href="/admin/revenue/">Revenue</a></li>
         <li><a href="/trial/">TRIAL</a></li>
         <li class="brand"><a href="/">IDLE</a></li>
         {% if not enrolled %}

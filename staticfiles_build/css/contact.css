@@ -1,0 +1,214 @@
+/* CONTACT PAGE STYLES */
+.contact-section {
+    padding: 60px 40px 100px;
+    background-color: var(--bg-color);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: calc(100vh - 100px);
+}
+
+.contact-header {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.contact-title {
+    font-size: clamp(3rem, 6vw, 4.5rem);
+    font-weight: 900;
+    letter-spacing: -0.02em;
+    color: var(--text-dark);
+    margin-bottom: 15px;
+    line-height: 1.1;
+}
+
+.contact-subtitle {
+    font-size: 1.1rem;
+    color: var(--text-gray);
+    font-weight: 500;
+    line-height: 1.5;
+}
+
+.contact-container {
+    display: flex;
+    max-width: 1200px;
+    width: 100%;
+    background: var(--white);
+    border-radius: 40px;
+    padding: 24px;
+    box-shadow: 0 10px 50px rgba(0,0,0,0.03);
+    gap: 40px;
+}
+
+.contact-form-card {
+    flex: 1;
+    padding: 40px 20px 40px 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.contact-brand {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font-heading);
+    font-weight: 800;
+    font-size: 1.2rem;
+    letter-spacing: 0.05em;
+    margin-bottom: 40px;
+    color: var(--text-dark);
+}
+
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.form-group label {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--text-dark);
+    margin-left: 10px;
+}
+
+.form-group input, 
+.form-group textarea {
+    width: 100%;
+    background-color: #F4F3F1;
+    border: 2px solid transparent;
+    border-radius: 40px;
+    padding: 18px 24px;
+    font-family: var(--font-body);
+    font-size: 1rem;
+    color: var(--text-dark);
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+.form-group textarea {
+    border-radius: 24px;
+    resize: vertical;
+    min-height: 140px;
+}
+
+.form-group input::placeholder, 
+.form-group textarea::placeholder {
+    color: #999;
+}
+
+.form-group input:focus, 
+.form-group textarea:focus {
+    background-color: #FFFFFF;
+    border-color: var(--accent-orange);
+    box-shadow: 0 0 15px rgba(241, 111, 36, 0.1);
+}
+
+.btn-submit {
+    background-color: var(--text-dark);
+    color: var(--white);
+    border: none;
+    padding: 18px;
+    border-radius: 40px;
+    font-weight: 800;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-top: 15px;
+}
+
+.btn-submit:hover {
+    background-color: #000;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+
+.contact-image-wrapper {
+    flex: 1;
+    border-radius: 30px;
+    overflow: hidden;
+}
+
+.contact-image-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+/* ===== FLASH MESSAGES ===== */
+#message-container {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 9999;
+  width: 100%;
+  max-width: 400px;
+  padding: 0 16px;
+}
+
+.flash-message {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 20px;
+  margin-bottom: 12px;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 500;
+  color: white;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(10px);
+}
+
+.flash-message.success {
+  background: linear-gradient(to right, #22c55e, #059669);
+}
+.flash-message.error {
+  background: linear-gradient(to right, #ef4444, #b91c1c);
+}
+.flash-message.default {
+  background-color: #1f2937;
+}
+
+.close-btn {
+  margin-left: 10px;
+  font-size: 18px;
+  font-weight: bold;
+  border: none;
+  background: none;
+  color: white;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+.close-btn:hover {
+  transform: scale(1.1);
+}
+/* RESPONSIVE DESIGN */
+@media (max-width: 900px) {
+    .contact-container {
+        flex-direction: column-reverse;
+        padding: 20px;
+        gap: 20px;
+    }
+    
+    .contact-form-card {
+        padding: 20px;
+    }
+    
+    .contact-image-wrapper {
+        height: 350px;
+    }
+    
+    .contact-section {
+        padding: 40px 20px 80px;
+    }
+}

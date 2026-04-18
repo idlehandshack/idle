@@ -1,0 +1,239 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Syne:wght@300;400;600;700&family=Space+Mono:wght@400;700&display=swap');
+
+:root {
+  --void: #03040A;
+  --deep: #070B14;
+  --surface: #0C1220;
+  --raised: #111827;
+  --lift: #172033;
+  --hover: #1C2840;
+
+  --neon: #00FFB2;
+  --neon-dim: rgba(0,255,178,0.12);
+  --neon-mid: rgba(0,255,178,0.35);
+  --fire: #FF4D00;
+  --fire-dim: rgba(255,77,0,0.12);
+  --gold: #FFD000;
+  --gold-dim: rgba(255,208,0,0.10);
+  --purple: #9B5DE5;
+  --purple-dim: rgba(155,93,229,0.12);
+
+  --tx: #E2EAF8;
+  --tx-muted: #5E7899;
+  --tx-ghost: #243145;
+
+  --brd: #0F1E30;
+  --brd2: #162438;
+  --brd3: #1E3450;
+
+  --r: 6px;
+  --rl: 10px;
+  --rxl: 16px;
+
+  --font-display: 'Orbitron', monospace;
+  --font-body: 'Syne', sans-serif;
+  --font-mono: 'Space Mono', monospace;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html, body {
+  background: var(--void) !important;
+  color: var(--tx) !important;
+  font-family: var(--font-body) !important;
+  font-size: 14px !important;
+}
+
+/* ══ SCROLLBAR ══ */
+::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: var(--deep); }
+::-webkit-scrollbar-thumb { background: var(--brd3); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--neon); }
+
+/* ══ HEADER ══ */
+#header {
+  background: var(--deep) !important;
+  border-bottom: 1px solid var(--brd2) !important;
+  padding: 0 28px !important;
+  height: 64px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  position: sticky !important;
+  top: 0 !important;
+  z-index: 200 !important;
+}
+
+#header::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--neon), var(--fire), var(--purple), transparent);
+}
+
+#branding h1 {
+  font-family: var(--font-display) !important;
+  font-size: 18px !important;
+  font-weight: 900 !important;
+  letter-spacing: 4px !important;
+  color: var(--tx) !important;
+  text-transform: uppercase !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 12px !important;
+}
+
+#branding h1::before {
+  content: 'IT';
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  background: var(--neon);
+  color: var(--void);
+  font-size: 14px;
+  font-weight: 900;
+  border-radius: 8px;
+  font-family: var(--font-display);
+}
+
+/* ══ LAYOUT OVERRIDES ══ */
+#content, #content-main {
+  background: var(--void) !important;
+  padding: 28px !important;
+}
+
+#content h1 {
+  font-family: var(--font-display) !important;
+  font-size: 22px !important;
+  font-weight: 700 !important;
+  letter-spacing: 3px !important;
+  color: var(--tx) !important;
+  text-transform: uppercase !important;
+  margin-bottom: 22px !important;
+  padding-bottom: 14px !important;
+  border-bottom: 1px solid var(--brd2) !important;
+  position: relative !important;
+}
+
+#content h1::after {
+  content: '';
+  position: absolute;
+  bottom: -1px; left: 0;
+  width: 60px; height: 2px;
+  background: var(--neon);
+}
+
+/* ══ ACTION BAR ══ */
+.actions {
+  background: var(--raised) !important;
+  border: 1px solid var(--brd2) !important;
+  border-radius: var(--r) !important;
+  padding: 9px 14px !important;
+  margin-bottom: 10px !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+}
+
+.actions select {
+  background: var(--surface) !important;
+  border: 1px solid var(--brd2) !important;
+  color: var(--tx) !important;
+  border-radius: var(--r) !important;
+  padding: 6px 10px !important;
+  font-family: var(--font-body) !important;
+  font-size: 12px !important;
+  outline: none !important;
+}
+
+/* ══ RESULTS TABLE ══ */
+.module {
+  background: var(--surface) !important;
+  border: 1px solid var(--brd2) !important;
+  border-radius: var(--rxl) !important;
+  overflow: hidden !important;
+  margin-bottom: 18px !important;
+}
+
+#result_list {
+  width: 100% !important;
+  border-collapse: collapse !important;
+}
+
+#result_list thead th {
+  background: var(--raised) !important;
+  color: var(--tx-ghost) !important;
+  font-family: var(--font-mono) !important;
+  font-size: 10px !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.14em !important;
+  text-transform: uppercase !important;
+  padding: 14px 16px !important;
+  border-bottom: 1px solid var(--brd2) !important;
+  text-align: left !important;
+}
+
+#result_list tbody tr {
+  border-bottom: 1px solid var(--brd) !important;
+  transition: background 0.1s !important;
+}
+
+#result_list tbody tr:hover {
+  background: var(--hover) !important;
+}
+
+#result_list tbody td {
+  padding: 13px 16px !important;
+  color: var(--tx) !important;
+  font-size: 13px !important;
+  vertical-align: middle !important;
+}
+
+/* ══ CUSTOM DASHBOARD STATS ══ */
+.it-stat-bar {
+  display: flex; gap: 10px; margin-bottom: 18px; flex-wrap: wrap;
+}
+.it-stat {
+  flex: 1; min-width: 130px;
+  background: #0C1220; border: 1px solid #162438; border-radius: 10px;
+  padding: 14px 16px; position: relative; overflow: hidden;
+}
+.it-stat::before {
+  content: ''; position: absolute;
+  top: 0; left: 0; right: 0; height: 2px;
+}
+.it-stat.neon::before { background: #00FFB2; }
+.it-stat.fire::before { background: #FF4D00; }
+.it-stat.gold::before { background: #FFD000; }
+.it-stat .lbl {
+  font-size: 9px; font-family: 'Space Mono', monospace;
+  letter-spacing: .16em; text-transform: uppercase; color: #243145;
+  margin-bottom: 4px;
+}
+.it-stat .val {
+  font-family: 'Orbitron', monospace; font-size: 24px;
+  font-weight: 700; line-height: 1; letter-spacing: 1px;
+}
+.it-stat.neon .val { color: #00FFB2; }
+.it-stat.fire .val { color: #FF4D00; }
+.it-stat.gold .val { color: #FFD000; }
+.it-stat .sub { font-size: 10px; color: #3D5870; margin-top: 3px; }
+
+/* ══ ADD BUTTON ══ */
+.addlink {
+  background: var(--neon) !important;
+  color: var(--void) !important;
+  font-family: var(--font-display) !important;
+  font-size: 10px !important;
+  font-weight: 700 !important;
+  padding: 9px 20px !important;
+  border-radius: var(--r) !important;
+  text-decoration: none !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  float: right; margin-bottom: 15px;
+}
+.addlink:hover { background: #33FFbf !important; }
