@@ -22,6 +22,7 @@ urlpatterns = [
     path('profile/', views.Profile, name="profile"), # Changed to lowercase to match template
     
     # Attendance & API Endpoints
+    
     path('attendence/', views.attendence, name="attendence"),
     path('api/mark-attendance/', views.mark_attendance_api),
     path('api/get-users/', views.get_users),
